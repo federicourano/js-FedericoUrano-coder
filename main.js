@@ -8,7 +8,7 @@ let nota2;
 let nota3;
 let promedio;
 
-const alumnos = [];
+const alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
 
 
 class Alumno {
@@ -33,21 +33,20 @@ function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio
 
 function nuevoAlumno() {
     agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio);
+    localStorage.setItem("alumnos", JSON.stringify(alumnos));
 }
 
 
 function mostrarTodo() {
+    const alumnosGuardados = JSON.parse(localStorage.getItem("alumnos")) || [];
     let mostrar = [];
-    const mostrar2 = [localStorage.getItem("alumnos")];
-    console.log(JSON.parse(mostrar2));
 
-    alumnos.forEach(alumno => {
-        mostrar.push(`<br/>Nombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1}, ${alumno.nota2}, ${alumno.nota3} | Promedio: ${alumno.promedio}`)
-    })
+    alumnosGuardados.forEach(alumno => {
+        mostrar.push(`<br/>Nombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1}, ${alumno.nota2}, ${alumno.nota3} | Promedio: ${alumno.promedio}`);
+    });
 
     let cosas = document.getElementById("cosas");
-    cosas.innerHTML = (`Alumnos totales y sus respectivos promedios y notas: <br/>
-    ${JSON.parse(mostrar2)} <br/>`);
+    cosas.innerHTML = (`Alumnos totales y sus respectivos promedios y notas: <br/> ${mostrar.join('')}`);
 }
 
 function limpiar() {
