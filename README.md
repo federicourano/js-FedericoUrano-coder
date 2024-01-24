@@ -1,1 +1,1 @@
-Esta es mi segunda pre-entrega. Es un simulador de agrego de alumnos, con sus notas y sus promedios. Para la proxima pre entrega voy a agregar de nuevo que el programa calcule tu promedio, en vez de agregarlo vos, no tuve tiempo para poder hacerlo
+Esta es mi tercera pre-entrega. Es un simulador de agrego de alumnos, con sus notas y sus promedios. 

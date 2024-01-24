@@ -10,6 +10,7 @@ let promedio;
 
 const alumnos = [];
 
+
 class Alumno {
     constructor(nombre, apellido, comision, nota1, nota2, nota3, promedio){
         this.nombre = nombre;
@@ -22,69 +23,58 @@ class Alumno {
     }
 }
 
-const Alumnos =[
-    {nombre: "Federico", apellido: "Urano", comision: "49825", nota1: 8, nota2: 10, nota3: 9, promedio: 9},
-    {nombre: "Jose Luis", apellido: "Martinez", comision: "49825", nota1: 6, nota2: 6, nota3: 6, promedio: 6}
-]
-
 function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio) {
     let agregar = new Alumno(nombre, apellido, comision, nota1, nota2, nota3, promedio)
     alumnos.push(agregar);
+
+
 }
 
-Alumnos.forEach(alumno => {
-    agregarAlumno(alumno.nombre, alumno.apellido, alumno.comision, 
-        alumno.nota1, alumno.nota2, alumno.nota3, alumno.promedio)
-})
 
 function nuevoAlumno() {
-    nombre = (prompt("Ingrese el nombre del alumno: "));
-    apellido = (prompt("Ingrese el apellido del alumno: "));
-    comision = (prompt("Ingrese la comision del alumno: "));
-    nota1 = (prompt("Ingrese la nota 1 del alumno: "));
-    nota2 = (prompt("Ingrese la nota 2 del alumno: "));
-    nota3 = (prompt("Ingrese la nota 3 del alumno: "));
-    promedio = (prompt("Ingrese el promedio del alumno: "));
-
     agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio);
-
-    menu();
 }
+
 
 function mostrarTodo() {
-    let mostrar = []
+    let mostrar = [];
+    const mostrar2 = [localStorage.getItem("alumnos")];
+    console.log(JSON.parse(mostrar2));
 
     alumnos.forEach(alumno => {
-        mostrar.push(`\nNombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1} ${alumno.nota2} ${alumno.nota3} | Promedio: ${alumno.promedio}`)
+        mostrar.push(`<br/>Nombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1}, ${alumno.nota2}, ${alumno.nota3} | Promedio: ${alumno.promedio}`)
     })
 
-    alert(`Alumnos totales y sus respectivos promedios y notas:
-    ${mostrar}`);
-
-    menu();
+    let cosas = document.getElementById("cosas");
+    cosas.innerHTML = (`Alumnos totales y sus respectivos promedios y notas: <br/>
+    ${JSON.parse(mostrar2)} <br/>`);
 }
 
-function menu() {
-    let selector = Number(prompt(` Bienvenido al registro y seguimiento de alumnos
-    Seleccione una opcion para continuar
-
-    1 = Agregar alumno nuevo
-    2 = Mostrar todos los alumnos
-    `))
-
-    switch (selector) {
-        case 1:
-            nuevoAlumno();
-            break;
-
-        case 2:
-            mostrarTodo();
-            break;
-
-        default:
-            alert('Seleccione una opcion valida del menu');
-            menu();
+function limpiar() {
+    let cosas = document.getElementById("cosas");
+    cosas.innerHTML = "";
+}
+let MostrarAlumnos = document.getElementById("mostrar-todo");
+let Limpiar = document.getElementById("limpiar");
+MostrarAlumnos.addEventListener("click", mostrarTodo);
+Limpiar.addEventListener("click", limpiar)
+let formulario = document.getElementById("formulario");
+formulario.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let inputs = e.target.children;
+    if (inputs[1].value != "" && inputs[3].value != "" 
+        && inputs[5].value != "" && inputs[7].value != ""
+        && inputs[9].value != "" && inputs[11].value != ""
+        && inputs[13].value != ""); {
+        let nombretest = inputs[1].value;
+        let apellidotest = inputs[3].value;
+        let comisiontest = inputs[5].value;
+        let nota1test = inputs[7].value;
+        let nota2test = inputs[9].value;
+        let nota3test = inputs[11].value;
+        let promediotest = inputs[13].value;
+        agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test, promediotest);
+        localStorage.setItem("alumnos", JSON.stringify(alumnos));
+        mostrarTodo()
     }
-}
-
-menu();
+});
