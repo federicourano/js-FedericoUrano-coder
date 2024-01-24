@@ -12,21 +12,21 @@ const alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
 
 
 class Alumno {
-    constructor(nombre, apellido, comision, nota1, nota2, nota3, promedio){
+    constructor(nombre, apellido, comision, nota1, nota2, nota3){
         this.nombre = nombre;
         this.apellido = apellido;
         this.comision = comision;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
-        this.promedio = promedio;
+        this.promedio = (nota1 + nota2 + nota3) / 3;
     }
 }
 
-function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio) {
-    let agregar = new Alumno(nombre, apellido, comision, nota1, nota2, nota3, promedio)
+function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3) {
+    let agregar = new Alumno(nombre, apellido, comision, nota1, nota2, nota3)
     alumnos.push(agregar);
-
+    localStorage.setItem("alumnos", JSON.stringify(alumnos));
 
 }
 
@@ -63,16 +63,14 @@ formulario.addEventListener("submit", (e) => {
     let inputs = e.target.children;
     if (inputs[1].value != "" && inputs[3].value != "" 
         && inputs[5].value != "" && inputs[7].value != ""
-        && inputs[9].value != "" && inputs[11].value != ""
-        && inputs[13].value != ""); {
+        && inputs[9].value != "" && inputs[11].value != ""); {
         let nombretest = inputs[1].value;
         let apellidotest = inputs[3].value;
         let comisiontest = inputs[5].value;
-        let nota1test = inputs[7].value;
-        let nota2test = inputs[9].value;
-        let nota3test = inputs[11].value;
-        let promediotest = inputs[13].value;
-        agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test, promediotest);
+        let nota1test = parseFloat(inputs[7].value);
+        let nota2test = parseFloat(inputs[9].value);
+        let nota3test = parseFloat(inputs[11].value);
+        agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test);
         localStorage.setItem("alumnos", JSON.stringify(alumnos));
         mostrarTodo()
     }
