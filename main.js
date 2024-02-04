@@ -1,4 +1,6 @@
+
 //Simulador de carga de datos de alumnos
+
 
 let nombre;
 let apellido;
@@ -7,6 +9,7 @@ let nota1;
 let nota2;
 let nota3;
 let promedio;
+
 
 const alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
 
@@ -24,9 +27,17 @@ class Alumno {
 }
 
 function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3) {
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Alumno Agregado",
+        showConfirmButton: false,
+        timer: 1500
+      });
     let agregar = new Alumno(nombre, apellido, comision, nota1, nota2, nota3)
     alumnos.push(agregar);
     localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    formulario.reset();
 
 }
 
@@ -58,12 +69,19 @@ let Limpiar = document.getElementById("limpiar");
 MostrarAlumnos.addEventListener("click", mostrarTodo);
 Limpiar.addEventListener("click", limpiar)
 let formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", (e) => {
+let agregarAlumnoBtn = document.getElementById("agregar-alumno");
+
+agregarAlumnoBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    let inputs = e.target.children;
-    if (inputs[1].value != "" && inputs[3].value != "" 
-        && inputs[5].value != "" && inputs[7].value != ""
-        && inputs[9].value != "" && inputs[11].value != ""); {
+    let inputs = formulario.children;
+    if (
+        inputs[1].value != "" &&
+        inputs[3].value != "" &&
+        inputs[5].value != "" &&
+        inputs[7].value != "" &&
+        inputs[9].value != "" &&
+        inputs[11].value != ""
+    ) {
         let nombretest = inputs[1].value;
         let apellidotest = inputs[3].value;
         let comisiontest = inputs[5].value;
@@ -72,6 +90,14 @@ formulario.addEventListener("submit", (e) => {
         let nota3test = parseFloat(inputs[11].value);
         agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test);
         localStorage.setItem("alumnos", JSON.stringify(alumnos));
-        mostrarTodo()
+        mostrarTodo();
+    }
+    else{
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Datos incorrectos o formulario incompleto",
+          });
+        formulario.reset();
     }
 });
