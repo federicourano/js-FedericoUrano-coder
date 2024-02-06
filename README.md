@@ -6,9 +6,9 @@ En las extenciones de VS Code me baje la que se llama "Live server" de "Ritwick 
 Simplemente le hago click derecho al index.html y clickeo la opcion de "Open with Live Server" 
 y automaticamente se habre una ventana con el proyecto ya funcional.
 
-Profe/tutores: Intenté lo mejor que pude para hacer que se actualize el JSON, pero no pude hacerlo, le
-pedí ayuda a ChatGPT y lo mejor que pude hacer fue que cada vez que le des a agregar un alumno,
-se descargue un json actualizado. Ya que si reinicias la página, se pierden los datos nuevos.
+Profe/tutores: Intenté lo mejor que pude para hacer que se actualize el JSON, pero no pude hacerlo.
+Lo mejor que pude hacer fue que cada vez que le des a agregar un alumno, se descargue un json 
+actualizado. Ya que si reinicias la página, se pierden los datos nuevos.
 Yo anteriormente utilizaba el LocalStorage, pero al cambiarme a un JSON local no logre hacer
 funcionar los 2 a la vez.
 
