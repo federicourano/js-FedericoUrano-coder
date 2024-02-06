@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h2>Pre-entrega 3 de Federico Urano</h2>
-    <button id="mostrar-todo">Mostrar Alumnos</button>
-    <button id="limpiar">Limpiar</button>
-    <form id="formulario">
-        <h4>Ingrese el nombre del alumno</h4>
-        <input type="text">
-        <h4>Ingrese el apellido del alumno</h4>
-        <input type="text">
-        <h4>Ingrese la comision del alumno</h4>
-        <input type="number">
-        <h4>Ingrese la nota 1 del alumno</h4>
-        <input type="number">
-        <h4>Ingrese la nota 2 del alumno</h4>
-        <input type="number">
-        <h4>Ingrese la nota 3 del alumno</h4>
-        <input type="number">
-        <button id="agregar-alumno">Agregar alumno</button>
-    </form>
-    <div id="cosas"></div>
+    <header class="header">
+        <h2>Pre-entrega 3 de Federico Urano</h2>
+    </header>
+    <main class="main">
+        <button id="mostrar-todo" class="btn btn-primary">Mostrar Alumnos</button>
+        <button id="limpiar" class="btn btn-primary">Limpiar</button>
+        <form id="formulario">
+            <h4>Ingrese el nombre del alumno</h4>
+            <input type="text">
+            <h4>Ingrese el apellido del alumno</h4>
+            <input type="text">
+            <h4>Ingrese la comision del alumno</h4>
+            <input type="number">
+            <h4>Ingrese la nota 1 del alumno</h4>
+            <input type="number">
+            <h4>Ingrese la nota 2 del alumno</h4>
+            <input type="number">
+            <h4>Ingrese la nota 3 del alumno</h4>
+            <input type="number">
+            <button id="agregar-alumno" class="btn btn-primary">Agregar alumno</button>
+        </form>
+        <div id="cosas">
+
+        </div>
+    </main>
+    <footer class="footer">
+        <div>
+            <h2>Pagina creada por Federico Daniel Urano</p>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="module" src="./main.js"></script>

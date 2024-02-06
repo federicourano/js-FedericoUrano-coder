@@ -1,0 +1,27 @@
+
+body{
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    background-color: aqua;
+    justify-content: center;
+}
+
+.main{
+    padding: 15px;
+    background-color:honeydew;
+    min-height: 76vh;
+}
+
+.cosas{
+    background-color:honeydew;
+}
+
+.footer{
+    background-color:aquamarine ;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
