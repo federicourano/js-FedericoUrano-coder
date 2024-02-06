@@ -1,17 +1,7 @@
-
 //Simulador de carga de datos de alumnos
 
 
-let nombre;
-let apellido;
-let comision;
-let nota1;
-let nota2;
-let nota3;
-let promedio;
-
-
-const alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+let alumnos = [];
 
 
 class Alumno {
@@ -26,6 +16,49 @@ class Alumno {
     }
 }
 
+function cargarAlumnosDesdeJSON() {
+    return new Promise((resolve, reject) => {
+        fetch('alumnos.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar el archivo JSON');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de alumnos cargados:', data);
+                const alumnosCargados = data.map(alumnoData => new Alumno(
+                    alumnoData.nombre,
+                    alumnoData.apellido,
+                    alumnoData.comision,
+                    alumnoData.nota1,
+                    alumnoData.nota2,
+                    alumnoData.nota3
+                ));
+                resolve(alumnosCargados);
+            })
+            .catch(error => {
+                console.error(error.message);
+                reject(error);
+            });
+    });
+}
+
+function guardarAlumnosEnJSON() {
+    const jsonData = JSON.stringify(alumnos);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'alumnos.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
+
 function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3) {
     Swal.fire({
         position: "top-end",
@@ -33,27 +66,16 @@ function agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3) {
         title: "Alumno Agregado",
         showConfirmButton: false,
         timer: 1500
-      });
-    let agregar = new Alumno(nombre, apellido, comision, nota1, nota2, nota3)
-    alumnos.push(agregar);
-    localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    });
+    let nuevoAlumno = new Alumno(nombre, apellido, comision, nota1, nota2, nota3);
+    alumnos.push(nuevoAlumno);
+    guardarAlumnosEnJSON();
     formulario.reset();
-
 }
-
-
-function nuevoAlumno() {
-    agregarAlumno(nombre, apellido, comision, nota1, nota2, nota3, promedio);
-    localStorage.setItem("alumnos", JSON.stringify(alumnos));
-}
-
 
 function mostrarTodo() {
-    const alumnosGuardados = JSON.parse(localStorage.getItem("alumnos")) || [];
-    let mostrar = [];
-
-    alumnosGuardados.forEach(alumno => {
-        mostrar.push(`<br/>Nombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1}, ${alumno.nota2}, ${alumno.nota3} | Promedio: ${alumno.promedio}`);
+    let mostrar = alumnos.map(alumno => {
+        return `<br/>Nombre: ${alumno.nombre} ${alumno.apellido} | Comision: ${alumno.comision} | Notas: ${alumno.nota1}, ${alumno.nota2}, ${alumno.nota3} | Promedio: ${alumno.promedio}`;
     });
 
     let cosas = document.getElementById("cosas");
@@ -64,10 +86,13 @@ function limpiar() {
     let cosas = document.getElementById("cosas");
     cosas.innerHTML = "";
 }
+
 let MostrarAlumnos = document.getElementById("mostrar-todo");
 let Limpiar = document.getElementById("limpiar");
+
 MostrarAlumnos.addEventListener("click", mostrarTodo);
 Limpiar.addEventListener("click", limpiar)
+
 let formulario = document.getElementById("formulario");
 let agregarAlumnoBtn = document.getElementById("agregar-alumno");
 
@@ -112,3 +137,12 @@ agregarAlumnoBtn.addEventListener("click", (e) => {
         formulario.reset();
     }
 });
+
+cargarAlumnosDesdeJSON()
+    .then(alumnosCargados => {
+        console.log('Alumnos cargados correctamente');
+        alumnos = alumnosCargados;
+    })
+    .catch(error => {
+        console.error('Error al cargar los alumnos:', error);
+    });
