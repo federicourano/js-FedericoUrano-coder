@@ -26,7 +26,6 @@ function cargarAlumnosDesdeJSON() {
                 return response.json();
             })
             .then(data => {
-                console.log('Datos de alumnos cargados:', data);
                 const alumnosCargados = data.map(alumnoData => new Alumno(
                     alumnoData.nombre,
                     alumnoData.apellido,
