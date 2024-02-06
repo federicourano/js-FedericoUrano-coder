@@ -113,8 +113,6 @@ agregarAlumnoBtn.addEventListener("click", (e) => {
         let nota1test = parseFloat(inputs[7].value);
         let nota2test = parseFloat(inputs[9].value);
         let nota3test = parseFloat(inputs[11].value);
-        // let cosas = document.getElementById("cosas");
-        // cosas.innerHTML = (`Cargando datos. Por favor, espere...`);
         Swal.fire({
             position: "center",
             icon: "info",
