@@ -88,9 +88,20 @@ agregarAlumnoBtn.addEventListener("click", (e) => {
         let nota1test = parseFloat(inputs[7].value);
         let nota2test = parseFloat(inputs[9].value);
         let nota3test = parseFloat(inputs[11].value);
-        agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test);
-        localStorage.setItem("alumnos", JSON.stringify(alumnos));
-        mostrarTodo();
+        // let cosas = document.getElementById("cosas");
+        // cosas.innerHTML = (`Cargando datos. Por favor, espere...`);
+        Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "Cargando datos. Por favor, espere...",
+            showConfirmButton: false,
+            timer: 3500
+          });
+        setTimeout(() =>{
+            agregarAlumno(nombretest, apellidotest, comisiontest, nota1test, nota2test, nota3test);
+            localStorage.setItem("alumnos", JSON.stringify(alumnos));
+            mostrarTodo();
+        }, 3500)
     }
     else{
         Swal.fire({
