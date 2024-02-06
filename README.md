@@ -9,6 +9,6 @@ y automaticamente se habre una ventana con el proyecto ya funcional.
 Profe/tutores: Intenté lo mejor que pude para hacer que se actualize el JSON, pero no pude hacerlo, le
 pedí ayuda a ChatGPT y lo mejor que pude hacer fue que cada vez que le des a agregar un alumno,
 se descargue un json actualizado. Ya que si reinicias la página, se pierden los datos nuevos.
-Yo anteriormente utilizaba el LocalStorage, pero me queria cambiar a utilizar un JSON local.
-
+Yo anteriormente utilizaba el LocalStorage, pero al cambiarme a un JSON local no logre hacer
+funcionar los 2 a la vez.
 
